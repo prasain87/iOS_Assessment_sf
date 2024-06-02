@@ -40,7 +40,7 @@ extension AddressService {
     geoCoder.geocodeAddressString(address) { (placemarks, error) in
       guard let placemarks = placemarks,
             let location = placemarks.first?.location else {
-        completion?(nil, SimpleError.address)
+        completion?(nil, SimpleError.address(nil))
         return
       }
       completion?(location, nil)
@@ -51,12 +51,20 @@ extension AddressService {
     return Observable.create { observer in
       let geoCoder = CLGeocoder()
       geoCoder.geocodeAddressString(address) { (placemarks, error) in
-        guard let placemarks = placemarks,
-              let location = placemarks.first?.location else {
-          observer.onError(SimpleError.address)
-          return
+        if let placemarks = placemarks, let location = placemarks.first?.location {
+            observer.onNext(location)
+        } else if let clErr = error as? CLError {
+            switch clErr.code {
+            case .network:
+                observer.onError(SimpleError.networkNoAvailable)
+            case .locationUnknown:
+                observer.onError(SimpleError.address("Unknown location, unable to obtain location at the moment."))
+            default:
+                observer.onError(SimpleError.address(nil))
+            }
+        } else {
+            observer.onError(SimpleError.address(nil))
         }
-        observer.onNext(location)
       }
       return Disposables.create()
     }
@@ -68,7 +76,7 @@ extension AddressService {
     guard let location = try? await geocoder.geocodeAddressString(address)
       .compactMap( { $0.location } )
       .first(where: { $0.horizontalAccuracy >= 0 } )
-    else { throw SimpleError.address }
+    else { throw SimpleError.address(nil) }
     return location
   }
   
@@ -78,7 +86,7 @@ extension AddressService {
       geoCoder.geocodeAddressString(address) { (placemarks, error) in
         guard let placemarks = placemarks,
               let location = placemarks.first?.location else {
-          promise(.failure(.address))
+          promise(.failure(.address(nil)))
           return
         }
         promise(.success(location))
@@ -92,7 +100,7 @@ extension AddressService {
       geoCoder.geocodeAddressString(address) { (placemarks, error) in
         guard let placemarks = placemarks,
               let location = placemarks.first?.location else {
-          observer.send(error: .address)
+          observer.send(error: .address(nil))
           return
         }
         observer.send(value: location)
