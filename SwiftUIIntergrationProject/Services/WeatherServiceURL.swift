@@ -22,8 +22,8 @@ func currentWeatherURL(location: CLLocation) -> URL? {
   /// - parameters:
   ///   - location: CLLocation
   /// - Returns: URL to retrieve forecast from OpenWeather
-func forecastURL(latitude: CLLocationDegrees, longitude: CLLocationDegrees) -> URL? {
-  weatherServiceUrl(path: "forecast", latitude: latitude, longitude: longitude)
+func forecastURL(location: CLLocation) -> URL? {
+    weatherServiceUrl(path: "forecast", latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
 }
 
 //Enter your Open weather API Key from: https://home.openweathermap.org/api_keys
