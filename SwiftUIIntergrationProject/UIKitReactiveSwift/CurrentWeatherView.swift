@@ -46,13 +46,6 @@ extension CurrentWeatherView {
             .drive(
                 onNext: { [weak self] data in
                     self?.updateData(data)
-                    print("data")
-                },
-                onCompleted: {
-                    print("complete")
-                },
-                onDisposed: {
-                    print("dispose")
                 })
             .disposed(by: disposeBag)
     }
@@ -99,7 +92,7 @@ extension CurrentWeatherView {
             if let error = error as? SimpleError {
                 lblTitle.text = error.displayMsg
             } else {
-                lblTitle.text = error.localizedDescription
+                lblTitle.text = "Something went wrong, please try again later!"
             }
         }
     }
@@ -135,14 +128,4 @@ struct CurrentWeatherViewModel {
     let temperature: String
     let wind: String
     let windDirection: String
-}
-
-extension CurrentWeatherViewModel {
-    init(data: CurrentWeatherJSONData) {
-        title = data.name
-        weather = "Current weather: " + (data.weather.first?.description ?? "")
-        temperature = "Temperature: \(data.main.temp) F"
-        wind = "Wind: \(data.wind.speed) mph"
-        windDirection = "Wind direction: \(data.wind.direction)"
-    }
 }

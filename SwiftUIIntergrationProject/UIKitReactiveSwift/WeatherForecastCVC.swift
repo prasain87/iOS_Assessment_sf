@@ -96,6 +96,10 @@ final class WeatherForecastCVC: UICollectionViewCell {
     }
 }
 
+extension WeatherForecastCVC {
+    static var identifier: String { "WeatherForecastCVC" }
+}
+
 //MARK: ViewModel for WeatherForecastCVC
 
 struct WeatherForecastViewModel {
@@ -105,19 +109,4 @@ struct WeatherForecastViewModel {
     let wind: String
     let windDirection: String
     let rain: String
-}
-
-extension WeatherForecastViewModel {
-    init(data: List) {
-        time = data.displayDate
-        temperature = "Temperature: \(data.temperatures.temp) F"
-        weather = "Weather: " + (data.weather.first?.description ?? "")
-        wind = "Wind: \(data.wind.speed) mph"
-        windDirection = "Wind direction: \(data.wind.direction)"
-        if let rn = data.rain {
-            rain = "Rain: \(rn.the3H) inches"
-        } else {
-            rain = "Rain: No rain"
-        }
-    }
 }

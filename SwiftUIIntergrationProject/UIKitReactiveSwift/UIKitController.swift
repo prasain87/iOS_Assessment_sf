@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 // TODO: Create UIKit View that either pre-selects address or user enters address, and retrieves current weather plus weather forecast
-class UIKitController: UIViewController {
+final class UIKitController: UIViewController {
     private var cellHeight: CGFloat { (2*view.bounds.width)/3 }
     
     let disposeBag = DisposeBag()
@@ -28,7 +28,6 @@ class UIKitController: UIViewController {
     private let labelForecast: UILabel = {
         let lbl = UILabel.getLabel(fonrSize: 26)
         lbl.isHidden = true
-        lbl.text = "5 day forcast"
         return lbl
     }()
     
@@ -36,11 +35,11 @@ class UIKitController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.register(WeatherForecastCVC.self, forCellWithReuseIdentifier: "WeatherForecastCVC")
+        cv.register(WeatherForecastCVC.self, forCellWithReuseIdentifier: WeatherForecastCVC.identifier)
         return cv
     }()
     
-    var viewModel: ViewModelProtocol = ViewModel()
+    var viewModel: ViewModelProtocol = ViewModel(environment: Environment.current)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +51,7 @@ class UIKitController: UIViewController {
     }
     
     func setupUI() {
+        addressTextField.placeholder = viewModel.addressPlaceholder
         view.addSubview(addressTextField)
         addressTextField.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
@@ -91,13 +91,13 @@ class UIKitController: UIViewController {
         
         viewModel
             .forecastDriver
-            .drive(forecastCollectinoView.rx.items(cellIdentifier: "WeatherForecastCVC", cellType: WeatherForecastCVC.self)) { index, model, cell in
+            .drive(forecastCollectinoView.rx.items(cellIdentifier: WeatherForecastCVC.identifier, cellType: WeatherForecastCVC.self)) { index, model, cell in
             cell.updateWith(model: model)
         }
         .disposed(by: disposeBag)
         
-        viewModel.hideForecastDriver
-            .drive(labelForecast.rx.isHidden)
+        viewModel.forecastHeader
+            .drive(labelForecast.rx.text)
             .disposed(by: disposeBag)
     }
 }

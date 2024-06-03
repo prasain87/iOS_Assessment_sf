@@ -24,7 +24,7 @@ final class NetworkServiceDefault: NetworkService {
                         let decoded = try JSONDecoder().decode(T.self, from: data)
                         obs.onNext(decoded)
                     } catch {
-                        obs.onError(SimpleError.dataParse(error.localizedDescription))
+                        obs.onError(SimpleError.dataParse("Invalid data received!"))
                         print(error)
                     }
                 } else {

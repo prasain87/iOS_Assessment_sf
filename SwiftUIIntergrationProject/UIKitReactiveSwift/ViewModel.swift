@@ -10,30 +10,35 @@ import RxCocoa
 import CoreLocation
 
 protocol ViewModelProtocol {
-    var addressRelay: PublishRelay<String?> { get }
+    var addressPlaceholder: String { get }
+    var addressRelay: BehaviorRelay<String?> { get }
     var curWeatherDriver: Driver<Result<CurrentWeatherViewModel?, Error>> { get }
     var forecastDriver: Driver<[WeatherForecastViewModel]> { get }
-    var hideForecastDriver: Driver<Bool> { get }
+    var forecastHeader: Driver<String?> { get }
 }
 
 final class ViewModel: ViewModelProtocol {
     let disposeBag = DisposeBag()
 
-    let addressRelay = PublishRelay<String?>()
+    let addressRelay = BehaviorRelay<String?>(value: nil)
     let curWeatherDriver: Driver<Result<CurrentWeatherViewModel?, Error>>
     
     let forecastDriver: Driver<[WeatherForecastViewModel]>
-    let hideForecastDriver: Driver<Bool>
+    let forecastHeader: Driver<String?>
+    let addressPlaceholder: String = "Enter City Here"
     
-    init() {
+    private let environment: Environment
+    
+    init(environment: Environment) {
+        self.environment = environment
         let locationObservable = addressRelay
             .asObservable()
-            .debounce(RxTimeInterval.milliseconds(200), scheduler: MainScheduler.asyncInstance)
+            .debounce(RxTimeInterval.milliseconds(300), scheduler: ConcurrentDispatchQueueScheduler(qos: .background))
             .flatMapLatest({ address -> Observable<Result<CLLocation?, Error>> in
                 guard let address, !address.isEmpty else {
                     return .just(.success(nil))
                 }
-                return AddressService.live.coordinateRX(address)
+                return environment.addressService.coordinateRX(address)
                     .map({.success($0)})
                     .catch({ Observable.just(.failure($0)) })
             })
@@ -46,41 +51,55 @@ final class ViewModel: ViewModelProtocol {
                     guard let location else {
                         return .just(.success(nil))
                     }
-                    return WeatherService.live.retrieveCurrentWeather(location)
+                    return environment.weatherServiceReactive.retrieveCurrentWeather(location)
                         .map({ .success($0?.mapToViewModel()) })
                         .catch({ Observable.just(.failure($0)) })
                 case .failure(let err):
                     return .just(.failure(err))
                 }
             })
-            .catch({ error in
-                    .just(.failure(error))
-            })
-            .asDriver(onErrorRecover: { error in
-                Driver.just(.failure(error))
-            })
+            .catch({ .just(.failure($0)) })
+            .asDriver(onErrorRecover: { Driver.just(.failure($0)) })
         
-        forecastDriver = locationObservable
-            .flatMapLatest({ result -> Observable<ForecastJSONData?> in
+        let forecastResult = locationObservable
+            .flatMapLatest({ result -> Observable<Result<[WeatherForecastViewModel], Error>> in
                 switch result {
                 case .success(let location):
                     guard let location else {
-                        return .just(nil)
+                        return .just(.success([]))
                     }
-                    return WeatherService.live.retrieveWeatherForecast(location)
-                case .failure(_):
-                    return .just(nil)
+                    return environment.weatherServiceReactive.retrieveWeatherForecast(location)
+                        .map({ data in
+                                .success(data.map({ $0.list.mapToViewModel() }) ?? [])
+                        })
+                        .catch({ Observable.just(.failure($0)) })
+                case .failure(let err):
+                    return .just(.failure(err))
                 }
             })
-            .map({ data in
-                return if let data {
-                    data.list.map({ WeatherForecastViewModel(data: $0) })
-                } else {
-                    []
-                }
-            })
-            .asDriver(onErrorJustReturn: [])
+            .asDriver(onErrorRecover: { Driver.just(.failure($0)) })
         
-        hideForecastDriver = forecastDriver.map({ $0.isEmpty })
+        forecastDriver = forecastResult.map({
+            switch $0 {
+            case .success(let data):
+                return data
+            case .failure(let err):
+                return []
+            }
+        })
+        
+        forecastHeader = forecastResult.map({
+            switch $0 {
+            case .success(let data):
+                return data.isEmpty ? nil : "5 day forecast"
+            case .failure(let err):
+                return if let error = err as? SimpleError {
+                    error.displayMsg
+                } else {
+                    "Something went wrong, please try again later!"
+                }
+
+            }
+        })
     }
 }
