@@ -21,15 +21,10 @@ final class UIKitController: UIViewController {
         let tf = UITextField()
         tf.borderStyle = .roundedRect
         tf.clearButtonMode = .always
-        tf.placeholder = "Enter City Here"
         return tf
     }()
     private let curWeatherView = CurrentWeatherView()
-    private let labelForecast: UILabel = {
-        let lbl = UILabel.getLabel(fonrSize: 26)
-        lbl.isHidden = true
-        return lbl
-    }()
+    private let labelForecast: UILabel = UILabel.getLabel(fonrSize: 26)
     
     private let forecastCollectinoView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
