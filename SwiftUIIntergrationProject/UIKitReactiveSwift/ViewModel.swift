@@ -83,7 +83,7 @@ final class ViewModel: ViewModelProtocol {
             switch $0 {
             case .success(let data):
                 return data
-            case .failure(let err):
+            case .failure(_):
                 return []
             }
         })
@@ -98,7 +98,6 @@ final class ViewModel: ViewModelProtocol {
                 } else {
                     "Something went wrong, please try again later!"
                 }
-
             }
         })
     }

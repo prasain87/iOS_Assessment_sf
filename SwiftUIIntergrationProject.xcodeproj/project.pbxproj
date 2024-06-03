@@ -11,12 +11,17 @@
 		1F5D952E2C0C44C70018062B /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5D952D2C0C44C70018062B /* ViewModel.swift */; };
 		1F5D95302C0C584B0018062B /* WeatherForecastCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5D952F2C0C584B0018062B /* WeatherForecastCVC.swift */; };
 		1F5D95322C0CC9E70018062B /* Mappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5D95312C0CC9E70018062B /* Mappers.swift */; };
+		1FE146702C0CE879001EED02 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE1466F2C0CE879001EED02 /* NetworkService.swift */; };
+		1FE146752C0CEAA4001EED02 /* weather.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FE146742C0CEAA4001EED02 /* weather.json */; };
+		1FE146792C0CEAE3001EED02 /* forecast.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FE146782C0CEAE3001EED02 /* forecast.json */; };
+		1FE1467D2C0CEC28001EED02 /* DataParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE1467C2C0CEC28001EED02 /* DataParserTest.swift */; };
+		1FE146802C0CF1A7001EED02 /* NetworkMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE1467A2C0CEB3B001EED02 /* NetworkMock.swift */; };
+		1FE146842C0D992E001EED02 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE146832C0D992E001EED02 /* Utils.swift */; };
 		9B00332D2BFED0340057F235 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 9B00332C2BFED0340057F235 /* RxBlocking */; };
 		9B0033312BFED0340057F235 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 9B0033302BFED0340057F235 /* RxCocoa */; };
 		9B0033352BFED0340057F235 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 9B0033342BFED0340057F235 /* RxRelay */; };
 		9B0033392BFED0340057F235 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9B0033382BFED0340057F235 /* RxSwift */; };
 		9B00333D2BFED0340057F235 /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = 9B00333C2BFED0340057F235 /* RxTest */; };
-		9B00333F2BFED0340057F235 /* RxTest-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 9B00333E2BFED0340057F235 /* RxTest-Dynamic */; };
 		9B0033422BFED3CF0057F235 /* SimpleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0033412BFED3CF0057F235 /* SimpleError.swift */; };
 		9B1FE3652BC0A09200F0A259 /* SampleAddresses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1FE3642BC0A09200F0A259 /* SampleAddresses.swift */; };
 		9B1FE3672BC0A0FD00F0A259 /* AddressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1FE3662BC0A0FD00F0A259 /* AddressService.swift */; };
@@ -82,6 +87,12 @@
 		1F5D952D2C0C44C70018062B /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		1F5D952F2C0C584B0018062B /* WeatherForecastCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecastCVC.swift; sourceTree = "<group>"; };
 		1F5D95312C0CC9E70018062B /* Mappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mappers.swift; sourceTree = "<group>"; };
+		1FE1466F2C0CE879001EED02 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		1FE146742C0CEAA4001EED02 /* weather.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = weather.json; sourceTree = "<group>"; };
+		1FE146782C0CEAE3001EED02 /* forecast.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = forecast.json; sourceTree = "<group>"; };
+		1FE1467A2C0CEB3B001EED02 /* NetworkMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMock.swift; sourceTree = "<group>"; };
+		1FE1467C2C0CEC28001EED02 /* DataParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataParserTest.swift; sourceTree = "<group>"; };
+		1FE146832C0D992E001EED02 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		9B0033412BFED3CF0057F235 /* SimpleError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleError.swift; sourceTree = "<group>"; };
 		9B1FE3642BC0A09200F0A259 /* SampleAddresses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleAddresses.swift; sourceTree = "<group>"; };
 		9B1FE3662BC0A0FD00F0A259 /* AddressService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressService.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -145,7 +156,6 @@
 				9B00333D2BFED0340057F235 /* RxTest in Frameworks */,
 				9B1FE3A42BC63D9100F0A259 /* Nimble in Frameworks */,
 				9B1FE3A12BC63D6600F0A259 /* Quick in Frameworks */,
-				9B00333F2BFED0340057F235 /* RxTest-Dynamic in Frameworks */,
 				9BBD8D2A2BBC5B0300A5F295 /* PreviewSnapshotsTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -160,6 +170,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1FE146732C0CEA68001EED02 /* response */ = {
+			isa = PBXGroup;
+			children = (
+				1FE146742C0CEAA4001EED02 /* weather.json */,
+				1FE146782C0CEAE3001EED02 /* forecast.json */,
+			);
+			path = response;
+			sourceTree = "<group>";
+		};
 		9B0033402BFED3C60057F235 /* Errors */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,6 +291,9 @@
 			isa = PBXGroup;
 			children = (
 				9BBD8D0C2BBC561000A5F295 /* SwiftUIIntergrationProjectTests.swift */,
+				1FE1467C2C0CEC28001EED02 /* DataParserTest.swift */,
+				1FE146832C0D992E001EED02 /* Utils.swift */,
+				1FE146732C0CEA68001EED02 /* response */,
 			);
 			path = SwiftUIIntergrationProjectTests;
 			sourceTree = "<group>";
@@ -339,6 +361,8 @@
 				9BAA25782BC7815F00AA42B3 /* AddressServiceMock.swift */,
 				9B1FE3AB2BC6F49600F0A259 /* WeatherService.swift */,
 				9B1FE3AD2BC6F4B000F0A259 /* WeatherServiceURL.swift */,
+				1FE1466F2C0CE879001EED02 /* NetworkService.swift */,
+				1FE1467A2C0CEB3B001EED02 /* NetworkMock.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -393,7 +417,6 @@
 				9B1FE3A02BC63D6600F0A259 /* Quick */,
 				9B1FE3A32BC63D9100F0A259 /* Nimble */,
 				9B00333C2BFED0340057F235 /* RxTest */,
-				9B00333E2BFED0340057F235 /* RxTest-Dynamic */,
 			);
 			productName = SwiftUIIntergrationProjectTests;
 			productReference = 9BBD8D082BBC561000A5F295 /* SwiftUIIntergrationProjectTests.xctest */;
@@ -484,6 +507,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FE146792C0CEAE3001EED02 /* forecast.json in Resources */,
+				1FE146752C0CEAA4001EED02 /* weather.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,6 +526,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FE146802C0CF1A7001EED02 /* NetworkMock.swift in Sources */,
 				9BD0A9022BC08ADA00953018 /* UIKitController.swift in Sources */,
 				9B1FE3742BC49BAE00F0A259 /* CurrentWeatherJSONData.swift in Sources */,
 				9B7651D12BEF1C5A009CCC56 /* Double+Extensions.swift in Sources */,
@@ -511,6 +537,7 @@
 				9BD0A8FF2BBFA8DE00953018 /* NavigationHandler.swift in Sources */,
 				9BD0A8FC2BBFA02800953018 /* ReactiveSwift+Extensions.swift in Sources */,
 				9B1FE3652BC0A09200F0A259 /* SampleAddresses.swift in Sources */,
+				1FE146702C0CE879001EED02 /* NetworkService.swift in Sources */,
 				9B1FE3862BC507C400F0A259 /* SwiftUIView.swift in Sources */,
 				1F5D952E2C0C44C70018062B /* ViewModel.swift in Sources */,
 				9BD0A8ED2BBE1C7100953018 /* MainMenuView.swift in Sources */,
@@ -540,7 +567,9 @@
 				9BAA25792BC7815F00AA42B3 /* AddressServiceMock.swift in Sources */,
 				9B1FE3A92BC63F0300F0A259 /* EnvironmentMock.swift in Sources */,
 				9BBD8D0D2BBC561000A5F295 /* SwiftUIIntergrationProjectTests.swift in Sources */,
+				1FE1467D2C0CEC28001EED02 /* DataParserTest.swift in Sources */,
 				9BAA25772BC77D6B00AA42B3 /* TestObserver.swift in Sources */,
+				1FE146842C0D992E001EED02 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -964,11 +993,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9B00332B2BFED0340057F235 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxTest;
-		};
-		9B00333E2BFED0340057F235 /* RxTest-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9B00332B2BFED0340057F235 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = "RxTest-Dynamic";
 		};
 		9B1FE3A02BC63D6600F0A259 /* Quick */ = {
 			isa = XCSwiftPackageProductDependency;

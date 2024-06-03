@@ -12,9 +12,9 @@ extension CurrentWeatherJSONData {
         CurrentWeatherViewModel(
             title: name,
             weather: "Current weather: " + (weather.first?.description ?? ""),
-            temperature: "Temperature: \(main.temp) F",
-            wind: "Wind: \(wind.speed) mph",
-            windDirection: "Wind direction: \(wind.direction)"
+            temperature: temperatureString(main.temp),
+            wind: windString(wind.speed),
+            windDirection: windDirectionString(wind.direction)
         )
     }
 }
@@ -24,12 +24,24 @@ extension Array where Element == List {
         map {
             WeatherForecastViewModel(
                 time: $0.displayDate,
-                temperature: "Temperature: \($0.temperatures.temp) F",
+                temperature: temperatureString($0.temperatures.temp),
                 weather: "Weather: " + ($0.weather.first?.description ?? ""),
-                wind: "Wind: \($0.wind.speed) mph",
-                windDirection: "Wind direction: \($0.wind.direction)",
-                rain: $0.rain.map({ "Rain: \($0.the3H) inches" }) ?? "Rain: No rain"
+                wind: windString($0.wind.speed),
+                windDirection: windDirectionString($0.wind.direction),
+                rain: $0.rain.map({ "Rain: \($0.the3H) inches" }) ?? "Rain: None"
             )
         }
     }
+}
+
+private func temperatureString(_ val: Double) -> String {
+    "Temperature: \(val) F"
+}
+
+private func windString(_ val: Double) -> String {
+    "Wind: \(val) mph"
+}
+
+private func windDirectionString(_ val: String) -> String {
+    "Wind direction: " + val
 }

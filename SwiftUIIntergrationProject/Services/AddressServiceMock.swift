@@ -14,23 +14,32 @@ import RxSwift
 @testable import SwiftUIIntergrationProject
 
 extension AddressService {
-  static var mock = AddressService(coordinates: coordinatesMock, asyncCoordinate: asyncCoordinateMock, coordinatePublisher: coordinatePubMock, coordinateRX: coordinateObservableMock)
+    static var mock = AddressService(
+        asyncCoordinate: asyncCoordinateMock,
+//        coordinatePublisher: coordinatePubMock,
+        coordinateRX: coordinateObservableMock,
+        coordinatesCompletion: coordinatesCompMock
+    )
 }
 
 extension AddressService {
-  static func asyncCoordinateMock(from address: String) async -> CLLocationCoordinate2D? {
+  static func asyncCoordinateMock(from address: String) async -> CLLocation? {
     return .init(latitude: 0, longitude: 0)
   }
   
-  static func coordinatePubMock(from address: String) -> AnyPublisher<CLLocation?, Never> {
-    Just(CLLocation.init(latitude: 0, longitude: 0)).eraseToAnyPublisher()
-  }
+//  static func coordinatePubMock(from address: String) -> AnyPublisher<CLLocation?, SimpleError> {
+//    Just(CLLocation.init(latitude: 0, longitude: 0)).eraseToAnyPublisher()
+//  }
   
-  static func coordinatesMock(from address: String) -> ValueSignalProducer<CLLocation?>{
-    .init(value: .init(latitude: 0, longitude: 0))
-  }
+//  static func coordinatesMock(from address: String) -> ValueSignalProducer<CLLocation?>{
+//    .init(value: .init(latitude: 0, longitude: 0))
+//  }
   
   static func coordinateObservableMock(from address: String) -> Observable<CLLocation?> {
     Observable<CLLocation?>.just(.init(latitude: 0, longitude: 0))
   }
+
+    static func coordinatesCompMock(from address: String, completion: ((CLLocation?, SimpleError?) -> Void)?) {
+        completion?(.init(latitude: 0, longitude: 0), nil)
+    }
 }

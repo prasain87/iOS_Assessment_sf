@@ -1,0 +1,43 @@
+{
+  "coord": {
+    "lon": 77.2236,
+    "lat": 28.5773
+  },
+  "weather": [
+    {
+      "id": 721,
+      "main": "Haze",
+      "description": "haze",
+      "icon": "50d"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 105.22,
+    "feels_like": 103.46,
+    "temp_min": 105.22,
+    "temp_max": 105.98,
+    "pressure": 1002,
+    "humidity": 18
+  },
+  "visibility": 4500,
+  "wind": {
+    "speed": 6.91,
+    "deg": 280
+  },
+  "clouds": {
+    "all": 40
+  },
+  "dt": 1717335070,
+  "sys": {
+    "type": 2,
+    "id": 145989,
+    "country": "IN",
+    "sunrise": 1717286020,
+    "sunset": 1717335894
+  },
+  "timezone": 19800,
+  "id": 6619396,
+  "name": "Asian Games Village",
+  "cod": 200
+}

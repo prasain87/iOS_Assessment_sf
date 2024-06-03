@@ -19,9 +19,9 @@ For example, if you wanted to use the publisher version to get the address from 
  TODO: use one of these services to convert an address string to CLLocation
  */
 struct AddressService {
-  var coordinates: (String) -> SignalProducer<CLLocation?, SimpleError> = coordinates
+//  var coordinates: (String) -> SignalProducer<CLLocation?, SimpleError> = coordinates
   var asyncCoordinate: (String) async throws -> CLLocation? = asyncCoordinate
-  var coordinatePublisher: (String) -> AnyPublisher<CLLocation?, SimpleError> = coordinatePub
+//  var coordinatePublisher: (String) -> AnyPublisher<CLLocation?, SimpleError> = coordinatePub
   var coordinateRX: (String) -> Observable<CLLocation?> = coordinateObservable
   var coordinatesCompletion: (String, ((CLLocation?, SimpleError?) -> Void)?) -> () = coordinatesComp
 }

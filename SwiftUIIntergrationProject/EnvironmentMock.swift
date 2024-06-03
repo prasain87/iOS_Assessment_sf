@@ -11,13 +11,13 @@ import ReactiveSwift
 @testable import SwiftUIIntergrationProject
 
 extension Environment {
-  static var mock = {
-    Environment(
-      scheduler: TestScheduler(),
-      backgroundScheduler: TestScheduler(),
-      runLoop: .init(),
-      weatherServiceReactive: .mock,
-      addressService: .mock
-    )
-  }
+    static func mock(networkMock: NetworkMock) -> Environment {
+        Environment(
+            scheduler: TestScheduler(),
+            backgroundScheduler: TestScheduler(),
+            runLoop: .init(),
+            weatherServiceReactive: WeatherService(networkService: networkMock),
+            addressService: .mock
+        )
+    }
 }
